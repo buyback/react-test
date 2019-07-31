@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import uuidv1 from "uuid";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Alert } from 'react-bootstrap';
 import { addPosting } from '../actions';
 
 function mapDispatchToProps(dispatch) {
@@ -47,8 +47,17 @@ class Form_Posting extends Component {
 
 
     localItems.push(this.state);
-    this.props.addPosting({ _id, title, content, posting_status });  //reducer add posting
-    localStorage.setItem("posts", JSON.stringify(localItems));      //store to local storage
+    var result = this.props.addPosting({ _id, title, content, posting_status });  //reducer add posting
+    
+    var object = document.getElementById("post-alert");
+    if (result.type === 'FOUND_BAD_WORD') {
+      object.classList.remove("d-none");
+      
+    }
+    else {
+      object.classList.add("d-none");
+      localStorage.setItem("posts", JSON.stringify(localItems));      //store to local storage
+    }
 
     this.setState({ id: "", title: "", content: "", posting_status: 0 });
 
@@ -65,6 +74,11 @@ class Form_Posting extends Component {
     return (
         
         <div className="container">
+          <div className="d-none" id ="post-alert">
+            <Alert variant="danger">
+              Title contains bad words !
+            </Alert>
+          </div>
         <Form onSubmit={this.handleSubmit}>
         <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>

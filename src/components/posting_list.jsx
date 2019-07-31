@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 };
 
 
-function ConnectedList({ postings }) {
+const ConnectedList = ({ postings }) => {
   const dispatch = useDispatch();
 
   var localItems = JSON.parse(localStorage.getItem('posts'))
@@ -32,7 +32,7 @@ function ConnectedList({ postings }) {
   </ul>
   );
     }
-  else { //show from redux state
+  else if (postings !== "Bad word"){ //show from redux state
 
     return (
     <ul className="list-group list-group-flush">
@@ -50,6 +50,9 @@ function ConnectedList({ postings }) {
   </ul>
     )
   }
+  
+  return "Fail to post";
+  
 
 };
 

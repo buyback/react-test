@@ -7,7 +7,7 @@ const mapStateToProps = state => {
 };
 
 
-function ConnectedList({ postings }) {
+const ConnectedList = ({ postings }) => {
   return (
   <ul className="list-group list-group-flush">
     {postings.map(el => (

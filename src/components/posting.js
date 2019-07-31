@@ -3,7 +3,7 @@ import Form from './form';
 import List from './posting_list';
 import {useSelector} from 'react-redux';
 
-function Posting(){
+const Posting = () => {
   const isLogged = useSelector(state => state.isLogged);
 
   if(isLogged) {

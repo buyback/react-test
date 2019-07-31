@@ -2,7 +2,7 @@ import React from "react";
 import Form from './form_login'
 import {useSelector} from 'react-redux';
 
-function Login(){
+const Login = () => {
   const isLogged = useSelector(state => state.isLogged);    //state.reducerName
   const username = useSelector(state => state.userData.username);
 
